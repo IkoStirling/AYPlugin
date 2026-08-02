@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(AYPlugin)
+project(AYPlugin
+    VERSION 0.1.0
+    DESCRIPTION "AYPlugin — DynamicLib + PluginManager contract"
+)
 
 set(SOURCES
     src/DynamicLibImpl.cpp
@@ -31,3 +34,5 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:MSVC>: /W4>
     $<$<CXX_COMPILER_ID:GNU,Clang>: -Wall -Wextra -Wpedantic>
 )
+
+message(STATUS "AYPlugin v0.1.0 (DynamicLib + PluginManager baseline contract) — see ${CMAKE_CURRENT_SOURCE_DIR}/design.md")

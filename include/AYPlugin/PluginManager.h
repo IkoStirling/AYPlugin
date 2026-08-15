@@ -1,7 +1,13 @@
 #pragma once
-// PluginManager.h - 插件管理器
+// AYPlugin/PluginManager.h - 插件管理器
 
-#include <IAYPluginManager.h>
+#include <AYPlugin/IPluginManager.h>
+#include <AYPlugin/IPluginLoader.h>
+
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace ayt::plugin
 {

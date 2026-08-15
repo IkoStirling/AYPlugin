@@ -1,53 +1,46 @@
-#include "DynamicPluginLoader.h"
-#include "DynamicLib.h"
+#include "AYPlugin/DynamicPluginLoader.h"
+#include <memory>
 
 namespace ayt::plugin
 {
 
-class DynamicPluginLoaderImpl : public IPluginLoader {
-public:
-    explicit DynamicPluginLoaderImpl(const std::string& path)
-        : _lib(path) {}
+DynamicPluginLoaderImpl::DynamicPluginLoaderImpl(const std::string& path)
+    : _lib(path)
+{
+}
 
-    bool load() override {
-        if (!_lib.load()) return false;
+bool DynamicPluginLoaderImpl::load(const std::string& path)
+{
+    if (path != _lib.getPath()) {
+        _lastError = "Plugin path does not match loader path";
+        return false;
+    }
+    if (!_lib.load()) return false;
 
-        auto create = reinterpret_cast<CreatePluginFunc>(
-            _lib.getSymbol("CreatePlugin")
-        );
-        if (!create) {
-            _lastError = "Failed to find CreatePlugin function";
-            return false;
-        }
-
-        _plugin = create();
-        if (!_plugin) {
-            _lastError = "CreatePlugin returned null";
-            return false;
-        }
-
-        return _plugin->initialize();
+    auto create = reinterpret_cast<CreatePluginFunc>(_lib.getSymbol("CreatePlugin"));
+    if (!create) {
+        _lastError = "Failed to find CreatePlugin function";
+        return false;
     }
 
-    void unload() override {
-        if (_plugin) {
-            _plugin->shutdown();
-            delete _plugin;
-            _plugin = nullptr;
-        }
-        _lib.unload();
+    _plugin = create();
+    if (!_plugin) {
+        _lastError = "CreatePlugin returned null";
+        return false;
     }
 
-    IPlugin* getPlugin() const override { return _plugin; }
-    bool isLoaded() const override { return _plugin != nullptr; }
-    const std::string& getPath() const override { return _lib.getPath(); }
-    const char* getLastError() const { return _lastError.c_str(); }
+    return _plugin->initialize();
+}
 
-private:
-    DynamicLib _lib;
-    IPlugin* _plugin = nullptr;
-    std::string _lastError;
-};
+void DynamicPluginLoaderImpl::unload()
+{
+    if (_plugin) {
+        _plugin->shutdown();
+        delete _plugin;
+        _plugin = nullptr;
+    }
+    _lib.unload();
+}
 
 std::unique_ptr<IPluginLoader> IPluginLoader::create(const std::string& path) {
     return std::make_unique<DynamicPluginLoaderImpl>(path);

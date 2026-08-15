@@ -1,4 +1,4 @@
-#include "DynamicLib.h"
+#include "AYPlugin/DynamicLib.h"
 
 #if defined(_WIN32)
 #include <windows.h>

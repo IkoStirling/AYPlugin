@@ -12,16 +12,18 @@ set(SOURCES
 )
 
 set(HEADERS
-    interface/IAYPlugin.h
-    interface/IAYPluginLoader.h
-    interface/IAYPluginManager.h
-    include/AYPlugin.h
-    include/DynamicLib.h
+    interface/AYPlugin/IPlugin.h
+    interface/AYPlugin/IPluginLoader.h
+    interface/AYPlugin/IPluginManager.h
+    include/AYPlugin/PluginManager.h
+    
+    include/AYPlugin/DynamicLib.h
 )
 
 add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${CMAKE_CURRENT_SOURCE_DIR}/interface
 )

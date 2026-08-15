@@ -1,4 +1,4 @@
-#include <AYTest/AYTest.h>
+#include <AYTest.h>
 
 int main() {
     return ayt::test::runAllTests();

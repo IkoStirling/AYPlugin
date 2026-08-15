@@ -1,7 +1,7 @@
 #pragma once
-// IAYPluginLoader.h - 插件加载器接口
+// AYPlugin/IPluginLoader.h - 插件加载器接口
 
-#include "IAYPlugin.h"
+#include <AYPlugin/IPlugin.h>
 
 namespace ayt::plugin
 {

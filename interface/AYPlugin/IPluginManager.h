@@ -1,7 +1,7 @@
 #pragma once
-// IAYPluginManager.h - 插件管理器接口
+// AYPlugin/IPluginManager.h - 插件管理器接口
 
-#include "IAYPlugin.h"
+#include <AYPlugin/IPlugin.h>
 
 namespace ayt::plugin
 {

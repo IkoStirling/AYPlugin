@@ -1,5 +1,5 @@
-#include <AYPlugin/AYPlugin.h>
-#include <AYTest/AYTest.h>
+#include <AYPlugin/Plugin.h>
+#include <AYTest.h>
 
 namespace ayt::plugin::test
 {

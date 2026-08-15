@@ -177,7 +177,7 @@ private:
 ### 3.1 平台抽象
 
 ```cpp
-// DynamicLib.h - 平台抽象动态库加载
+// AYPlugin/DynamicLib.h - 平台抽象动态库加载
 class DynamicLib {
 public:
     explicit DynamicLib(const std::string& path);
@@ -383,15 +383,15 @@ AYPlugin/
 ├── design.md
 ├── CMakeLists.txt
 ├── interface/
-│   ├── IAYPlugin.h            # 插件接口
-│   ├── IAYPluginLoader.h      # 加载器接口
-│   └── IAYPluginManager.h     # 管理器接口
+│   ├── AYPlugin/IPlugin.h            # 插件接口
+│   ├── AYPlugin/IPluginLoader.h      # 加载器接口
+│   └── AYPlugin/IPluginManager.h     # 管理器接口
 │
 ├── include/
-│   ├── AYPlugin.h             # 主入口
-│   ├── PluginManager.h        # 插件管理器
+│   ├── AYPlugin\Plugin.h             # 主入口
+│   ├── AYPlugin/PluginManager.h        # 插件管理器
 │   ├── StaticPluginRegistry.h # 静态注册表
-│   └── DynamicLib.h           # 动态库抽象
+│   └── AYPlugin/DynamicLib.h           # 动态库抽象
 │
 ├── src/
 │   ├── PluginManager.cpp

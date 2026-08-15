@@ -1,7 +1,7 @@
 #pragma once
-// DynamicLib.h - 动态库抽象
+// AYPlugin/DynamicLib.h - 动态库抽象
 
-#include <aycore/AYCore.h>
+#include <AYCore.h>
 #include <string>
 
 #if defined(_WIN32)

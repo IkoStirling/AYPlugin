@@ -1,8 +1,8 @@
 #pragma once
-// DynamicPluginLoader.h - 动态插件加载器
+// AYPlugin/DynamicPluginLoader.h - 动态插件加载器
 
-#include <IAYPluginLoader.h>
-#include <DynamicLib.h>
+#include <AYPlugin/IPluginLoader.h>
+#include <AYPlugin/DynamicLib.h>
 
 namespace ayt::plugin
 {

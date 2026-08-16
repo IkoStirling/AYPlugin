@@ -37,4 +37,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
     $<$<CXX_COMPILER_ID:GNU,Clang>: -Wall -Wextra -Wpedantic>
 )
 
+enable_testing()
+add_subdirectory(unittest)
+
 message(STATUS "AYPlugin v0.1.0 (DynamicLib + PluginManager baseline contract) — see ${CMAKE_CURRENT_SOURCE_DIR}/design.md")

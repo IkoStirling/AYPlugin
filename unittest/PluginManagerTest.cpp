@@ -1,16 +1,18 @@
-#include <AYPlugin/Plugin.h>
+#include <AYPlugin.h>
 #include <AYTest.h>
 
 namespace ayt::plugin::test
 {
 
-TEST_CASE("PluginManager_Singleton") {
+TEST_SUITE(PluginManagerTests)
+
+TEST_CASE(Singleton) {
     auto& mgr1 = IPluginManager::instance();
     auto& mgr2 = IPluginManager::instance();
-    ASSERT_EQ(&mgr1, &mgr2);
+    CHECK(&mgr1 == &mgr2);
 }
 
-TEST_CASE("PluginManager_RegisterStatic") {
+TEST_CASE(RegisterStatic) {
     auto& mgr = IPluginManager::instance();
     mgr.unloadAll();
 
@@ -26,11 +28,11 @@ TEST_CASE("PluginManager_RegisterStatic") {
     TestPlugin plugin;
     mgr.registerStaticPlugin(&plugin);
 
-    ASSERT_TRUE(mgr.hasPlugin("Test"));
-    ASSERT_EQ(mgr.getPlugin("Test"), &plugin);
+    CHECK_TRUE(mgr.hasPlugin("Test"));
+    CHECK(mgr.getPlugin("Test") == &plugin);
 }
 
-TEST_CASE("PluginManager_DependencyCheck") {
+TEST_CASE(DependencyCheck) {
     auto& mgr = IPluginManager::instance();
     mgr.unloadAll();
 
@@ -58,8 +60,10 @@ TEST_CASE("PluginManager_DependencyCheck") {
     mgr.registerStaticPlugin(&base);
     mgr.registerStaticPlugin(&dep);
 
-    ASSERT_TRUE(mgr.checkDependencies(&base));
-    ASSERT_TRUE(mgr.checkDependencies(&dep));
+    CHECK_TRUE(mgr.checkDependencies(&base));
+    CHECK_TRUE(mgr.checkDependencies(&dep));
 }
+
+TEST_SUITE_END
 
 } // namespace ayt::plugin::test

@@ -10,6 +10,7 @@ namespace ayt::plugin
 class DynamicPluginLoaderImpl : public IPluginLoader {
 public:
     explicit DynamicPluginLoaderImpl(const std::string& path);
+    ~DynamicPluginLoaderImpl() override;
 
     bool load(const std::string& path) override;
     void unload() override;

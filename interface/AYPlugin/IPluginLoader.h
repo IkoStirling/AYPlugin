@@ -2,6 +2,8 @@
 // AYPlugin/IPluginLoader.h - 插件加载器接口
 
 #include <AYPlugin/IPlugin.h>
+#include <memory>
+#include <string>
 
 namespace ayt::plugin
 {

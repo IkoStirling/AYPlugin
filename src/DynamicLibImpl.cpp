@@ -1,4 +1,5 @@
 #include "AYPlugin/DynamicLib.h"
+#include <filesystem>
 
 #if defined(_WIN32)
 #include <windows.h>
@@ -20,7 +21,13 @@ bool DynamicLib::load() {
     if (_handle) return true;
 
 #if defined(_WIN32)
-    _handle = LoadLibraryA(_path.c_str());
+    try {
+        const auto native=std::filesystem::absolute(std::filesystem::u8path(_path));
+        _handle = LoadLibraryExW(native.c_str(),nullptr,LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR|LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
+    } catch (const std::filesystem::filesystem_error&) {
+        _lastError = "Invalid library path";
+        return false;
+    }
     if (!_handle) {
         _lastError = "Failed to load library";
         return false;

@@ -1,7 +1,7 @@
 #pragma once
 // AYPlugin/IPlugin.h - 插件接口
 
-#include <AYCore.h>
+#include <vector>
 
 namespace ayt::plugin
 {

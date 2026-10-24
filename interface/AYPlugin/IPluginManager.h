@@ -2,6 +2,8 @@
 // AYPlugin/IPluginManager.h - 插件管理器接口
 
 #include <AYPlugin/IPlugin.h>
+#include <string>
+#include <type_traits>
 
 namespace ayt::plugin
 {
